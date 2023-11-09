@@ -27,8 +27,8 @@ public class MaintenanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maintenance);
-        conn = new ConexionHelper(getApplicationContext(), "bd_usuarios", null, 1);
 
+        conn = new ConexionHelper(getApplicationContext(), "bd_usuarios", null, 1);
 
         txtid = (EditText) findViewById(R.id.txtId);
         txtnombre = (EditText) findViewById(R.id.txtNombre);
@@ -60,6 +60,7 @@ public class MaintenanceActivity extends AppCompatActivity {
         });
     }
 
+    // metodo elimina registro
     private void eliminarUsuario() {
         SQLiteDatabase db = conn.getWritableDatabase();
         String[] parametros = {txtid.getText().toString()};
@@ -71,7 +72,7 @@ public class MaintenanceActivity extends AppCompatActivity {
         db.close();
     }
 
-
+    // metodo actualiza registro
     private void actualizarUsuario() {
         SQLiteDatabase db = conn.getWritableDatabase();
         String[] parametros = {txtid.getText().toString()};
@@ -85,6 +86,7 @@ public class MaintenanceActivity extends AppCompatActivity {
         db.close();
     }
 
+    // metodo del boton buscar
     private void consultar() {
         SQLiteDatabase db = conn.getReadableDatabase();
         String[] parametros = {txtid.getText().toString()};
@@ -103,6 +105,28 @@ public class MaintenanceActivity extends AppCompatActivity {
         }
     }
 
+    private void consultarSql() {
+        SQLiteDatabase db=conn.getReadableDatabase();
+        String[] parametros={txtid.getText().toString()};
+
+        try {
+            //select nombre,telefono from usuario where codigo=?
+            Cursor cursor=db.rawQuery("SELECT "+Utility.CAMPO_NOMBRE+","+Utility.CAMPO_CORREO+
+                    " FROM "+Utility.TABLA_USUARIO+" WHERE "+Utility.CAMPO_ID+"=? ",parametros);
+
+            cursor.moveToFirst();
+            txtnombre.setText(cursor.getString(0));
+            txtcorreo.setText(cursor.getString(1));
+
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"El documento no existe",Toast.LENGTH_LONG).show();
+            limpiar();
+        }
+
+    }
+
+
+    // metodo limpia los text
     private void limpiar() {
         txtnombre.setText("");
         txtcorreo.setText("");

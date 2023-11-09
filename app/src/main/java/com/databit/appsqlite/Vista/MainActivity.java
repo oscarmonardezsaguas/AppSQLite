@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnconsultar = (Button) findViewById(R.id.btnConsultar);
         btnlistar=(Button) findViewById(R.id.btnListar);
 
-
+          
         btnregistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

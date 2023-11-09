@@ -50,6 +50,20 @@ public class RegisterActivity extends AppCompatActivity {
 
         Long idResultante=db.insert(Utility.TABLA_USUARIO,Utility.CAMPO_ID, contentValues);
         Toast.makeText(getApplicationContext(),"ATENCION, id Registrado..."+idResultante, Toast.LENGTH_SHORT).show();
-
+        db.close();
     }
+
+    private void registrarUsuariosSql() {
+        ConexionHelper conn=new ConexionHelper(this,"bd_usuarios",null,1);
+
+        SQLiteDatabase db=conn.getWritableDatabase();
+        String insert="INSERT INTO "+Utility.TABLA_USUARIO
+                +" ( " +Utility.CAMPO_ID+","+Utility.CAMPO_NOMBRE+","+Utility.CAMPO_CORREO+")" +
+                " VALUES ("+textid.getText().toString()+", '"+txtnombre.getText().toString()+"','"
+                +txtcorreo.getText().toString()+"')";
+        db.execSQL(insert);
+        Toast.makeText(getApplicationContext(),"ATENCION, id Registrado..."+textid.getText().toString(), Toast.LENGTH_SHORT).show();
+        db.close();
+    }
+
 }
