@@ -1,0 +1,23 @@
+ ArrayAdapter adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listaInformacion);
+
+   - ArrayAdapter: Es una clase proporcionada por Android que se utiliza para adaptar una lista de elementos
+    a una vista de lista (como un ListView).
+
+   - this: Se refiere al contexto actual. En este caso, se está usando dentro de una actividad, por lo que
+   hace referencia a la instancia de la actividad actual.
+
+   - android.R.layout.simple_list_item_1: Es un layout predefinido proporcionado por Android que se utiliza para
+    mostrar un único elemento en una lista. En este caso, se trata de un diseño simple que muestra un solo
+    TextView.
+
+   - listaInformacion: Es la lista de datos que se va a mostrar en el `ListView`. En este caso, parece que
+   contiene cadenas que representan la información de los usuarios.
+
+2. listViewUsuarios.setAdapter(adaptador);
+
+   - listViewUsuarios: Es el ListView en el que se mostrarán los elementos.
+
+   - setAdapter(adaptador): Se establece el adaptador creado (adaptador) como el adaptador que se
+   utilizará para proporcionar los datos al ListView. Esto significa que el ListView mostrará la
+   información contenida en listaInformacion usando el diseño android.R.layout.simple_list_item_1.
+l.

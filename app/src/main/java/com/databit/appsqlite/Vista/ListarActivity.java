@@ -29,16 +29,20 @@ public class ListarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar);
 
+        // Configuración del ListView
         listViewUsuarios=(ListView) findViewById(R.id.listViewUsuarios);
 
+        // Inicialización de la conexión a la base de datos
         conn=new ConexionHelper(getApplicationContext(), "bd_usuarios", null, 1 );
         listViewUsuarios= (ListView) findViewById(R.id.listViewUsuarios);
 
         consultarListaUsuarios();
 
+        // Creación de un ArrayAdapter para mostrar la lista en el ListView
         ArrayAdapter adaptador=new ArrayAdapter(this, android.R.layout.simple_list_item_1,listaInformacion);
         listViewUsuarios.setAdapter(adaptador);
 
+        // Configuración del evento de clic en un elemento de la lista
         listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -69,9 +73,9 @@ public class ListarActivity extends AppCompatActivity {
     private void obtenerLista(){
         listaInformacion=new ArrayList<String>();
         for (int i=0; i<listaUsuarios.size(); i++){
-            listaInformacion.add(listaUsuarios.get(i).getId()+ " - " + listaUsuarios.get(i).getNombre());
+            listaInformacion.add(listaUsuarios.get(i).getId()+ " - "
+                    + listaUsuarios.get(i).getNombre());
         }
-
     }
 
 }
